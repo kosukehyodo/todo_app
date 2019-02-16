@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+    Route::get('/', 'UserController@index')->name('user.index');
+
+    Route::prefix('user')->group(function () {
+        Route::post('/login', 'UserController@login')->name('user.login');
+        Route::get('/add', 'UserController@add')->name('user.add');
+        Route::post('/store', 'UserController@store')->name('user.store');
+        Route::get('/profile', 'UserController@profile')->name('user.profile');
+    });
