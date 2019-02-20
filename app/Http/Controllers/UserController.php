@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\User\UserRequest;
-use App\User;
+use App\Models\User;
 use App\Repositories\Contract\UserContract;
 
 class UserController extends Controller
@@ -30,7 +30,7 @@ class UserController extends Controller
             if (Auth::attempt($authinfo)) {
                 $user = Auth::user();
 
-                return redirect()->route('user.profile')->with('user', $user);
+                return redirect()->route('board.index')->with('user', $user);
             } else {
                 return redirect()->back()->with('message', 'failed to login！');
             }
