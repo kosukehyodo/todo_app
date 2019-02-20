@@ -24,9 +24,9 @@ class UserController extends Controller
             if (Auth::attempt($authinfo)) {
                 $user = Auth::user();
                 //return redirect()->route(user.profile)->with('user', $user)とするとundefinedを起こす！？
-                return view('user.profile')->with('user', $user);
+                return view('board.index')->with('user', $user);
             } else {
-                return redirect()->back()->with('message', 'failed to login！');
+                return redirect()->back()->with('message', 'Failed to login!');
             }
         }
     }
@@ -45,10 +45,5 @@ class UserController extends Controller
         $user->save();
 
         return redirect('/')->with('message', 'Success to Regist!');
-    }
-
-    public function profile()
-    {
-        return view('user.profile');
     }
 }
