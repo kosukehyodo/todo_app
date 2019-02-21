@@ -6,9 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\User\UserRequest;
 use App\User;
+use App\Repositories\Contract\UserContract;
 
 class UserController extends Controller
 {
+    public function __construct(UserContract $userContract)
+    {
+        $this->user = $userContract;
+    }
+
     public function index()
     {
         return View('user.index');
@@ -23,8 +29,8 @@ class UserController extends Controller
             ];
             if (Auth::attempt($authinfo)) {
                 $user = Auth::user();
-                //return redirect()->route(user.profile)->with('user', $user)とするとundefinedを起こす！？
-                return view('user.profile')->with('user', $user);
+
+                return redirect()->route('user.profile')->with('user', $user);
             } else {
                 return redirect()->back()->with('message', 'failed to login！');
             }
@@ -38,13 +44,7 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
-
-        return redirect('/')->with('message', 'Success to Regist!');
+        return $this->user->registUser();
     }
 
     public function profile()
