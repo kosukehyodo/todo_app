@@ -14,9 +14,11 @@
     Route::get('/', 'UserController@index')->name('user.index');
 
     Route::prefix('user')->group(function () {
-        Route::post('/home', 'UserController@login')->name('user.home');
+        Route::post('/home', 'UserController@login')->middleware('auth')->name('user.home');
         Route::get('/add', 'UserController@add')->name('user.add');
         Route::post('/store', 'UserController@store')->name('user.store');
     });
 
-    Route::resource('board', 'BoardController')->only(['store']);
+    Route::group(['middleware' => 'auth'], function () {
+        Route::resource('board', 'BoardController')->only(['store']);
+    });
