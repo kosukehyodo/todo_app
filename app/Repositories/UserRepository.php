@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Repositories\Contract\UserContract;
-use App\User;
+use App\Models\User;
 
 class UserRepository implements UserContract
 {
