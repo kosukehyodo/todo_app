@@ -32,7 +32,7 @@ class UserController extends Controller
 
                 return redirect()->route('board.index')->with('user', $user);
             } else {
-                return redirect()->back()->with('message', 'failed to login！');
+                return redirect()->back()->with('message', 'Failed to login!');
             }
         }
     }
@@ -44,7 +44,7 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        return $this->user->registUser();
+        return $this->user->registUser($request);
     }
 
     public function profile()

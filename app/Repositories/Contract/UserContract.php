@@ -7,5 +7,5 @@ interface UserContract
     /**
      * ユーザーの新規登録.
      */
-    public function registUser();
+    public function registUser($request);
 }

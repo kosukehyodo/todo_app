@@ -20,5 +20,5 @@
     });
 
     Route::group(['middleware' => 'auth'], function () {
-        Route::resource('board', 'BoardController')->only(['store']);
+        Route::resource('board', 'BoardController')->only(['index', 'store']);
     });

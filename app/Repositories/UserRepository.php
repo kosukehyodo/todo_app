@@ -7,7 +7,7 @@ use App\Models\User;
 
 class UserRepository implements UserContract
 {
-    public function registUser()
+    public function registUser($request)
     {
         $user = new User();
         $user->name = $request->name;
