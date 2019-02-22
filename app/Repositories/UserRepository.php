@@ -15,6 +15,6 @@ class UserRepository implements UserContract
         $user->password = bcrypt($request->password);
         $user->save();
 
-        return redirect('/')->with('message', 'Success to Regist!');
+        return redirect('/user/login')->with('message', 'Success to Regist!');
     }
 }

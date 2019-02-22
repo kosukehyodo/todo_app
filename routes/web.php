@@ -14,8 +14,9 @@
     Route::get('/', 'UserController@index')->name('user.index');
 
     Route::prefix('user')->group(function () {
-        Route::post('/home', 'UserController@login')->middleware('auth')->name('user.home');
+        Route::get('/login', 'UserController@login')->name('user.login');
         Route::get('/add', 'UserController@add')->name('user.add');
+        Route::post('/{name}', 'UserController@signup')->name('user.signup');
         Route::post('/store', 'UserController@store')->name('user.store');
     });
 

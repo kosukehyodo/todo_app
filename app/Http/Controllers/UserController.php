@@ -17,10 +17,10 @@ class UserController extends Controller
 
     public function index()
     {
-        return View('user.index');
+        return view('user.index');
     }
 
-    public function login(Request $request)
+    public function signup(Request $request)
     {
         if ($request->isMethod('post')) {
             $authinfo = [
@@ -30,16 +30,16 @@ class UserController extends Controller
             if (Auth::attempt($authinfo)) {
                 $user = Auth::user();
                 //redirect()->route('board.index')->with('user', $user)だと次のページで＄userが取れなかった。
-                return view('board.index')->with('user', $user);
+                return view('user.index')->with('user', $user);
             } else {
                 return redirect()->back()->with('message', 'Failed to login!');
             }
         }
     }
 
-    public function add()
+    public function login()
     {
-        return view('user.add');
+        return view('user.login');
     }
 
     public function store(UserRequest $request)
@@ -47,8 +47,8 @@ class UserController extends Controller
         return $this->user->registUser($request);
     }
 
-    public function profile()
+    public function add()
     {
-        return view('user.profile');
+        return view('user.add');
     }
 }
