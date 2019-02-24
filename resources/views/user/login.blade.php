@@ -21,7 +21,7 @@
                 @endforeach
             </div>
             @endif
-            <form action="{{ route('user.signup',auth()->user()->name) }}" method="post" class="mt-3">
+            <form action="{{ route('user.signup') }}" method="post" class="mt-3">
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="text" id="email" name="email" class="form-control" style="width:600px;">

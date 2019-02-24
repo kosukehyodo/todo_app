@@ -15,11 +15,6 @@ class UserController extends Controller
         $this->user = $userContract;
     }
 
-    public function index()
-    {
-        return view('user.index');
-    }
-
     public function signup(Request $request)
     {
         if ($request->isMethod('post')) {

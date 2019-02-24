@@ -5,6 +5,7 @@
     <div class="container">
         <h2>Registration</h2>
         <form action="{{ route('user.store') }}" method="post" class="mt-3">
+            {{ csrf_field() }}
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" class="form-control" style="width:600px;">
@@ -29,7 +30,6 @@
             <div class="text-right">
                 <button type="submit" class="btn btn-primary mt-4">Registor</button>
             </div>
-            {{ csrf_field() }}
         </form>
     </div>
 </div>

@@ -11,13 +11,17 @@
 |
 */
 
-    Route::get('/', 'UserController@index')->name('user.index');
+    Route::get('/', 'WelcomeController@index');
 
     Route::prefix('user')->group(function () {
-        Route::get('/login', 'UserController@login')->name('user.login');
-        Route::get('/add', 'UserController@add')->name('user.add');
-        Route::post('/{name}', 'UserController@signup')->name('user.signup');
-        Route::post('/store', 'UserController@store')->name('user.store');
+        Route::group(['middleware' => 'guest'], function () {
+            Route::post('/store', 'UserController@store')->name('user.store');
+            Route::get('/login', 'UserController@login')->name('user.login');
+            Route::get('/add', 'UserController@add')->name('user.add');
+        });
+        Route::group(['middleware' => 'auth'], function () {
+            Route::post('/home', 'UserController@signup')->name('user.signup');
+        });
     });
 
     Route::group(['middleware' => 'auth'], function () {

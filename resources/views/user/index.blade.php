@@ -3,7 +3,7 @@
 @section('header_menu')
 @parent
 @if (isset($user))
-<span class="text-muted text-center">Welcome to {{ $user->name }} !!</span>
+<span class="text-muted">Welcome to {{ $user->name }} !!</span>
 @endif
 <a class="btn btn-outline-primary mr-4" href="{{ route('user.login') }}">Login</a>
 <a class="btn btn-outline-primary" href="{{ route('user.add') }}">Registor</a>
