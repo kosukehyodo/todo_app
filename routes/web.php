@@ -11,19 +11,15 @@
 |
 */
 
-    Route::get('/', 'WelcomeController@index');
+    Route::resource('/', 'WelcomeController');
 
+    Route::resource('user', 'UserController')->only(['create', 'store']);
     Route::prefix('user')->group(function () {
-        Route::group(['middleware' => 'guest'], function () {
-            Route::post('/store', 'UserController@store')->name('user.store');
-            Route::get('/login', 'UserController@login')->name('user.login');
-            Route::get('/add', 'UserController@add')->name('user.add');
-        });
-        Route::group(['middleware' => 'auth'], function () {
-            Route::post('/home', 'UserController@signup')->name('user.signup');
-        });
+        Route::post('/home', 'UserController@signup')->name('user.signup')->middleware('redirect');
+        Route::get('/login', 'UserController@login')->name('user.login');
     });
 
     Route::group(['middleware' => 'auth'], function () {
+        Route::get('user/logout', 'UserController@logout')->name('user.logout');
         Route::resource('board', 'BoardController')->only(['index', 'store']);
     });

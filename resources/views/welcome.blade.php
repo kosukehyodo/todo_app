@@ -1,98 +1,79 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
+@section('header_menu')
+@parent
+@if (isset($user))
+<span class="text-muted">Welcome to {{ $user->name }} !!</span>
+@endif
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+@if (Auth::check())
+<a class="btn btn-outline-primary" href="{{ route('user.logout') }}">Logout</a>
+@else
+<a class="btn btn-outline-primary mr-4" href="{{ route('user.login') }}">Login</a>
+<a class="btn btn-outline-primary mr-4" href="{{ route('user.create') }}">Registor</a>
+@endif
+@stop
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+<!-- cssが読み込まれない -->
+<!-- <link rel="stylesheet" href="{{ asset('/css/styles.css') }}"> -->
 
-            .full-height {
-                height: 100vh;
-            }
+@section('content')
+<div class="pricing-header pt-md-5 pb-md-5 mx-auto text-center">
+    <h1 class="display-5">My Board</h1>
+</div>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
 
-            .position-ref {
-                position: relative;
-            }
+<div class="card mt-4" data-toggle="modal" data-target="#myModal" style=" width: 20rem; height: 150px;">
+    <div class="card-body">
+        <h3>New Board</h3>
+    </div>
+</div>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+<!-- モーダルの設定 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <input type="text" id="board_title" class="form-control" placeholder="Board title">
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-2 ml-1 text-muted">Board Color</p>
+                <div class="row">
+                    <div class="btn-group mb-3 color" data-toggle="buttons">
+                        <label class="btn ml-4 color" style="width:80px; height:40px; background-color:#006699;">
+                            <input type="checkbox" class="checkbox" autocomplete="off">
+                        </label>
+                    </div>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn ml-2 color" style="width:80px; height:40px; background-color:#FFEEFF;">
+                            <input type="checkbox" class="checkbox" autocomplete="off">
+                        </label>
+                    </div>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn ml-2 color" style="width:80px; height:40px; background-color:#FFFFCC;">
+                            <input type="checkbox" class="checkbox" autocomplete="off">
+                        </label>
+                    </div>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn ml-2 color" style="width:80px; height:40px; background-color:#EEEEEE;">
+                            <input type="checkbox" class="checkbox" autocomplete="off">
+                        </label>
+                    </div>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn ml-2 color" style="width:80px; height:40px; background-color:#FFDBC9;">
+                            <input type="checkbox" class="checkbox" autocomplete="off">
+                        </label>
+                    </div>
                 </div>
             </div>
-        </div>
-    </body>
-</html>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="btn" class="btn btn-primary mr-4">Save</button>
+            </div><!-- /.modal-footer -->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@endsection

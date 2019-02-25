@@ -15,6 +15,28 @@ class UserController extends Controller
         $this->user = $userContract;
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('user.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(UserRequest $request)
+    {
+        return $this->user->registUser($request);
+    }
+
     public function signup(Request $request)
     {
         if ($request->isMethod('post')) {
@@ -25,7 +47,7 @@ class UserController extends Controller
             if (Auth::attempt($authinfo)) {
                 $user = Auth::user();
                 //redirect()->route('board.index')->with('user', $user)だと次のページで＄userが取れなかった。
-                return view('user.index')->with('user', $user);
+                return view('welcome')->with('user', $user);
             } else {
                 return redirect()->back()->with('message', 'Failed to login!');
             }
@@ -37,13 +59,10 @@ class UserController extends Controller
         return view('user.login');
     }
 
-    public function store(UserRequest $request)
+    public function logout()
     {
-        return $this->user->registUser($request);
-    }
+        Auth::logout();
 
-    public function add()
-    {
-        return view('user.add');
+        return redirect()->route('index');
     }
 }
