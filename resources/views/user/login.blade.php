@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('header_menu')
-
+@parent
+<a class="btn btn-outline-primary mr-4" href="{{ route('user.create') }}">Registor</a>
+@stop
 @section('content')
 
 @if(session('message') == "Failed to login!")

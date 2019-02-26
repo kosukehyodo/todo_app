@@ -18,7 +18,7 @@ class RedirectIfDirectAccess
     public function handle($request, Closure $next)
     {
         if (!$request->session()->has('direct')) {
-            return redirect('/');
+            return redirect()->route('user.login');
         }
 
         return $next($request);
