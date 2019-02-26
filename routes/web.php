@@ -15,7 +15,7 @@
 
     Route::resource('user', 'UserController')->only(['create', 'store']);
     Route::prefix('user')->group(function () {
-        Route::post('/home', 'UserController@signup')->name('user.signup')->middleware('redirect');
+        Route::post('/home', 'UserController@signup')->name('user.signup');
         Route::get('/login', 'UserController@login')->name('user.login');
     });
 

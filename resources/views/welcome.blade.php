@@ -15,7 +15,7 @@
 @stop
 
 <!-- cssが読み込まれない -->
-<!-- <link rel="stylesheet" href="{{ asset('/css/styles.css') }}"> -->
+<link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
 
 @section('content')
 <div class="pricing-header pt-md-5 pb-md-5 mx-auto text-center">
@@ -23,7 +23,7 @@
 </div>
 
 
-<div class="card mt-4" data-toggle="modal" data-target="#myModal" style=" width: 20rem; height: 150px;">
+<div class="card mt-4" data-toggle="modal" data-target="#myModal">
     <div class="card-body">
         <h3>New Board</h3>
     </div>
