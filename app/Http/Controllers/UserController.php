@@ -46,8 +46,8 @@ class UserController extends Controller
             ];
             if (Auth::attempt($authinfo)) {
                 $user = Auth::user();
-                //redirect()->route('index')->with('user', $user)だと次のページで＄userが取れなかった。
-                return view('welcome')->with('user', $user);
+
+                return redirect()->route('index')->with('user', $user);
             } else {
                 return redirect()->back()->with('message', 'Failed to login!');
             }
