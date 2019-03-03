@@ -8,21 +8,20 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot()
     {
-        //
     }
 
     /**
      * Register any application services.
-     *
-     * @return void
      */
     public function register()
     {
-        //
+        // User
+        $this->app->bind(
+            \App\Repositories\Contract\UserContract::class,
+            \App\Repositories\UserRepository::class
+        );
     }
 }

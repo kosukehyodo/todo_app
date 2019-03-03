@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+    Route::resource('/', 'WelcomeController')->middleware('guest');
+
+    Route::resource('user', 'UserController')->only(['create', 'store']);
+    Route::name('user.')->prefix('user')->group(function () {
+        Route::post('/home', 'UserController@signup')->name('signup');
+        Route::get('/login', 'UserController@login')->name('login');
+        Route::get('/logout', 'UserController@logout')->name('logout')->middleware('auth');
+    });
+
+    Route::group(['middleware' => 'auth'], function () {
+        Route::resource('board', 'BoardController')->only(['index', 'store']);
+    });
