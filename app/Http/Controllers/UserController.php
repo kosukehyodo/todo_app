@@ -46,8 +46,8 @@ class UserController extends Controller
             ];
             if (Auth::attempt($authinfo)) {
                 $user = Auth::user();
-
-                return redirect()->route('index')->with('user', $user);
+                //redirect()->route('user.signup')->with('user', $user)だとrouteで定義されていな為、エラー起こる。
+                return view('welcome')->with('user', $user);
             } else {
                 return redirect()->back()->with('message', 'Failed to login!');
             }

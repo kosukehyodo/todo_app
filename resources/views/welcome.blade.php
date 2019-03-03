@@ -2,8 +2,8 @@
 
 @section('header_menu')
 @parent
-@if (Session::has('user'))
-<span class="text-muted">Welcome to {{ session('user')->name; }} !!</span>
+@if (isset($user))
+<span class="text-muted">Welcome to {{ $user->name }} !!</span>
 @endif
 
 @if (Auth::check())
