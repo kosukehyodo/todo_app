@@ -6,15 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Board extends Model
 {
-    protected $fillable = ['title'];
+    protected $fillable = ['title', 'color', 'user_id'];
 
-    public function user()
+    public function users()
     {
         return $this->belongsTo('APP\Models\User');
-    }
-
-    public function color()
-    {
-        return $this->hasOne('App\Models\Color');
     }
 }

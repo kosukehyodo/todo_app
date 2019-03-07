@@ -45,9 +45,9 @@ class UserController extends Controller
             'password' => $request->password,
             ];
             if (Auth::attempt($authinfo)) {
-                $user = Auth::user();
-                //redirect()->route('user.signup')->with('user', $user)だとrouteで定義されていな為、エラー起こる。
-                return view('welcome')->with('user', $user);
+                $users = Auth::user();
+
+                return view('welcome')->with('users', $users);
             } else {
                 return redirect()->back()->with('message', 'Failed to login!');
             }

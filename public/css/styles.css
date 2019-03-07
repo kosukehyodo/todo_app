@@ -1,4 +1,8 @@
 .card{
-    width: 20rem; 
     height: 150px;
+    cursor: pointer;
+}
+
+.row{
+    
 }
