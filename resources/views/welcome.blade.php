@@ -2,6 +2,7 @@
 
 @section('header_menu')
 @parent
+
 @if (isset($users))
 <a class="text-muted mr-5">Welcome to {{ $users->name }} !!</a>
 @endif
