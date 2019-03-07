@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Board;
 use Illuminate\Http\Request;
+use App\Http\Requests\Board\BoardRequest;
+use App\Repositories\Contract\BoardContract;
 
 class BoardController extends Controller
 {
+    public function __construct(BoardContract $boardContract)
+    {
+        $this->board = $boardContract;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,6 @@ class BoardController extends Controller
      */
     public function index()
     {
-        return view('board.index');
     }
 
     /**
@@ -33,8 +39,9 @@ class BoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BoardRequest $request)
     {
+        return $this->board->registBoard($request);
     }
 
     /**
