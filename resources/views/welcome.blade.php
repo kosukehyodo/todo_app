@@ -25,7 +25,7 @@
     </div>
     @if (isset($users))
     @foreach($users->boards as $board)
-    <div class="card mt-4 mr-5" style="width:20rem;">
+    <div class="card mt-4 mr-5">
         <div class="card-body cord-color" id="{{$board->color}}">
             <h3>{{$board->title}}</h3>
         </div>
@@ -84,7 +84,6 @@
     {{ csrf_field() }}
 </form>
 <script>
-    <?php if (isset($board)): ?>
     window.onload = function() {
         var color = document.getElementById('{{$board->color}}');
         switch (color.id) {
@@ -109,6 +108,5 @@
                 break;
         }
     }
-    <?php endif; ?>
 </script>
 @endsection
