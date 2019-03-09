@@ -18,7 +18,7 @@
     <h1 class="display-5">My Board</h1>
 </div>
 <div class="row" style="margin-left:21px">
-    <div class="card mt-4 mr-5" data-toggle="modal" data-target="#myModal" style="width:20rem;">
+    <div class="card btn-light mt-4 mr-5" data-toggle="modal" data-target="#myModal" style="width:20rem; color:black;">
         <div class="card-body">
             <h3>New Board</h3>
         </div>
@@ -109,6 +109,6 @@
                 break;
         }
     }
-<?php endif; ?>
+    <?php endif; ?>
 </script>
 @endsection
