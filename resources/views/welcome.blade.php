@@ -7,33 +7,36 @@
 @endif
 
 @if (Auth::check())
-<a class="btn btn-outline-primary" href="{{ route('user.logout') }}">Logout</a>
+<a class="btn btn-outline-primary" href="{{ route('user.logout') }}" onclick='return confirm("Are you sure you want to logout?");'>Logout</a>
 @endif
 @stop
-
-<link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
 
 @section('content')
 <div class="pricing-header pt-md-5 pb-md-5 mx-auto text-center">
     <h1 class="display-5">My Board</h1>
 </div>
 <div class="row" style="margin-left:21px">
-    <div class="card btn-light mt-4 mr-5" data-toggle="modal" data-target="#myModal" style="width:20rem; color:black;">
+    <div class="card mt-4 mr-5" data-toggle="modal" data-target="#myModal" style="width:20rem; color:black;">
         <div class="card-body">
-            <h3>New Board</h3>
+            <h3 class="text-muted">New Board</h3>
         </div>
     </div>
     @if (isset($users))
     @foreach($users->boards as $board)
-    <div class="card mt-4 mr-5" style="width:20rem;">
-        <div class="card-body cord-color" id="{{$board->color}}">
-            <h3>{{$board->title}}</h3>
+    <a class="a_invalid" href="{{ route('board.show', $board->id) }}">
+        <div class="card mt-4 mr-5" style="width:20rem;">
+            <div class="card-body {{ $board->color }}">
+                <h3>{{$board->title}}</h3>
+                <form action="{{ route('board.destroy', $board->id) }}" id="form_{{ $board->id }}" method="post">
+                    <a href="#" data-id="{{ $board->id }}" id="relative" class="btn btn-danger float-right btn-sm"
+                        onclick="deletePost(this);">Delete</a>
+                    {{ csrf_field() }}
+                    {{ method_field('delete') }}
+                </form>
+            </div>
         </div>
-    </div>
-    @endforeach
-    @endif
-</div>
-<!-- モーダルの設定 -->
+    </a> @endforeach @endif
+</div> <!-- モーダルの設定 -->
 <form action="{{ route('board.store') }}" method="post">
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -84,31 +87,12 @@
     {{ csrf_field() }}
 </form>
 <script>
-    window.onload = function() {
-        <?php if (isset($board)): ?>
-        var color = document.getElementById('{{$board->color}}');
-        switch (color.id) {
-            case 'blue':
-                color.style.backgroundColor = '006699';
-                break;
+    function deletePost(e) {
+        'use strict';
 
-            case 'pink':
-                color.style.backgroundColor = 'FFEEFF';
-                break;
-
-            case 'yellow':
-                color.style.backgroundColor = 'FFFFCC';
-                break;
-
-            case 'glay':
-                color.style.backgroundColor = 'EEEEEE';
-                break;
-
-            case 'orange':
-                color.style.backgroundColor = 'FFDBC9';
-                break;
+        if (confirm('What really sure you want to delete?')) {
+            document.getElementById('form_' + e.dataset.id).submit();
         }
     }
-    <?php endif; ?>
 </script>
 @endsection

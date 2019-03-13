@@ -16,6 +16,16 @@ class BoardRepository implements BoardContract
         $board->user_id = Auth::user()->id;
         $board->save();
 
-        // return view('welcome')->with('message', 'Success to Regist!');
+        return redirect()->route('board.show', $board->id);
+    }
+
+    public function deleteBoard($board)
+    {
+        $board = Board::findOrFail($board)->first();
+        $board->delete();
+        $data = Board::all();
+
+        // return redirect()->back()->with('data', $data);
+        return view('welcome')->with('data', $data);
     }
 }
