@@ -6,9 +6,11 @@
 .card:hover{
     border:2px solid #C0C0C0;
 }
+
 .a_invalid {
     color: black;
 }
+
 
 .a_invalid:hover {
     text-decoration: none;

@@ -41,7 +41,9 @@ class BoardController extends Controller
      */
     public function store(BoardRequest $request)
     {
-        return $this->board->registBoard($request);
+        $this->board->registBoard($request);
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -88,6 +90,8 @@ class BoardController extends Controller
      */
     public function destroy(Board $board)
     {
-        return $this->board->deleteBoard($board);
+        $this->board->deleteBoard($board);
+
+        return redirect()->back();
     }
 }

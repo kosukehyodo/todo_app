@@ -15,6 +15,13 @@ class UserController extends Controller
         $this->user = $userContract;
     }
 
+    public function index()
+    {
+        $users = Auth::user();
+
+        return view('user.index')->with('users', $users);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -45,9 +52,7 @@ class UserController extends Controller
             'password' => $request->password,
             ];
             if (Auth::attempt($authinfo)) {
-                $users = Auth::user();
-
-                return view('welcome')->with('users', $users);
+                return redirect()->route('user.index');
             } else {
                 return redirect()->back()->with('message', 'Failed to login!');
             }

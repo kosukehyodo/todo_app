@@ -13,7 +13,7 @@
 
     Route::resource('/', 'WelcomeController')->middleware('guest');
 
-    Route::resource('user', 'UserController')->only(['create', 'store']);
+    Route::resource('user', 'UserController')->only(['create', 'store', 'index']);
     Route::name('user.')->prefix('user')->group(function () {
         Route::post('/home', 'UserController@signup')->name('signup');
         Route::get('/login', 'UserController@login')->name('login');

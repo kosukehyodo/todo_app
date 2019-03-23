@@ -7,7 +7,8 @@
 @endif
 
 @if (Auth::check())
-<a class="btn btn-outline-primary" href="{{ route('user.logout') }}" onclick='return confirm("Are you sure you want to logout?");'>Logout</a>
+<a class="btn btn-outline-primary" href="{{ route('user.logout') }}"
+    onclick='return confirm("Are you sure you want to logout?");'>Logout</a>
 @endif
 @stop
 
@@ -23,20 +24,15 @@
     </div>
     @if (isset($users))
     @foreach($users->boards as $board)
-    <a class="a_invalid" href="{{ route('board.show', $board->id) }}">
-        <div class="card mt-4 mr-5" style="width:20rem;">
-            <div class="card-body {{ $board->color }}">
-                <h3>{{$board->title}}</h3>
-                <form action="{{ route('board.destroy', $board->id) }}" id="form_{{ $board->id }}" method="post">
-                    <a href="#" data-id="{{ $board->id }}" id="relative" class="btn btn-danger float-right btn-sm"
-                        onclick="deletePost(this);">Delete</a>
-                    {{ csrf_field() }}
-                    {{ method_field('delete') }}
-                </form>
-            </div>
+    <div class="card mt-4 mr-5" style="width:20rem;">
+        <div class="card-body {{ $board->color }}" onclick="location.href='{{ route('board.show', $board->id) }}'">
+            <h3>{{$board->title}}</h3>
+            <a href="#" data-id="{{ $board->id }}" id="relative"
+                class="btn btn-danger float-right btn-sm delete_board">Delete</a>
+            </form>
         </div>
-    </a> 
-    @endforeach 
+    </div>
+    @endforeach
     @endif
 </div> <!-- モーダルの設定 -->
 <form action="{{ route('board.store') }}" method="post">
@@ -89,12 +85,40 @@
     {{ csrf_field() }}
 </form>
 <script>
-    function deletePost(e) {
-        'use strict';
+        $('.delete_board').on('click', function() {
+            'use strict';
 
-        if (confirm('What really sure you want to delete?')) {
-            document.getElementById('form_' + e.dataset.id).submit();
-        }
-    }
+            if (confirm('What really sure you want to delete?')) {
+                var board_id = $(this).attr('data-id');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                        url: '/board/' + board_id,
+                        type: 'DELETE',
+                        data: {
+                            'id': board_id,
+                            _token: '{{ csrf_token() }}'
+                        } 
+                    })
+                  
+                    .done(function(e) {
+                        e.preventDefault()
+                    })
+
+                    .fail(function() {
+                        alert('削除に失敗しました。');
+                    });
+
+            } else {
+                (function(e) {
+                    e.preventDefault()
+                });
+            };
+        });
 </script>
 @endsection
