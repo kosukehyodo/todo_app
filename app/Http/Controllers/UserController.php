@@ -13,6 +13,8 @@ class UserController extends Controller
     public function __construct(UserContract $userContract)
     {
         $this->user = $userContract;
+        //routingに描きたいがresourceでまとめているため、controllerで指定
+        $this->middleware('auth')->only(['index']);
     }
 
     public function index()

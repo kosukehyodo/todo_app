@@ -25,11 +25,10 @@
     @if (isset($users))
     @foreach($users->boards as $board)
     <div class="card mt-4 mr-5" style="width:20rem;">
-        <div class="card-body {{ $board->color }}" onclick="location.href='{{ route('board.show', $board->id) }}'">
+        <div class="card-body {{ $board->color }} mycard" data-id="{{ $board->id }}">
             <h3>{{$board->title}}</h3>
-            <a href="#" data-id="{{ $board->id }}" id="relative"
-                class="btn btn-danger float-right btn-sm delete_board">Delete</a>
-            </form>
+            <div data-id="{{ $board->id }}" id="relative" class="btn btn-danger float-right btn-sm delete_card">Delete
+            </div>
         </div>
     </div>
     @endforeach
@@ -85,40 +84,47 @@
     {{ csrf_field() }}
 </form>
 <script>
-        $('.delete_board').on('click', function() {
-            'use strict';
+    var card = document.getElementsByClassName('mycard');
 
-            if (confirm('What really sure you want to delete?')) {
-                var board_id = $(this).attr('data-id');
+    for (var i = 0; i < card.length; i++) {
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+        card[i].addEventListener("click", function() {
+            alert("go to detail");
+            document.location.href = '/board/' + this.dataset.id;
+        }, false);
+    }
+
+    $('.delete_card').on('click', function(e) {
+        'use strict';
+        if (confirm('What really sure you want to delete?')) {
+            var board_id = $(this).attr('data-id');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                }
+            });
+            $.ajax({
+                    url: '/board/' + board_id,
+                    type: 'DELETE',
+                    data: {
+                        'id': board_id,
+                        _token: '{{ csrf_token() }}'
                     }
+                })
+
+                .done(function(e) {
+                    alert("stop");
+                    e.stopPropagation();
+                })
+                .fail(function() {
+                    alert('削除に失敗しました。');
                 });
-
-                $.ajax({
-                        url: '/board/' + board_id,
-                        type: 'DELETE',
-                        data: {
-                            'id': board_id,
-                            _token: '{{ csrf_token() }}'
-                        } 
-                    })
-                  
-                    .done(function(e) {
-                        e.preventDefault()
-                    })
-
-                    .fail(function() {
-                        alert('削除に失敗しました。');
-                    });
-
-            } else {
-                (function(e) {
-                    e.preventDefault()
-                });
-            };
-        });
+        } else {
+            (function(e) {
+                e.stopPropagation();
+            });
+        };
+    });
 </script>
 @endsection

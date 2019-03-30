@@ -11,7 +11,7 @@
 |
 */
 
-    Route::resource('/', 'WelcomeController')->middleware('guest');
+    Route::resource('/', 'WelcomeController');
 
     Route::resource('user', 'UserController')->only(['create', 'store', 'index']);
     Route::name('user.')->prefix('user')->group(function () {
