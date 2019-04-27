@@ -1,4 +1,39 @@
-.card{
-    width: 20rem; 
+.card {
     height: 150px;
+    cursor: pointer;
 }
+
+.card:hover{
+    border:2px solid #C0C0C0;
+}
+
+.a_invalid {
+    color: black;
+}
+
+
+.a_invalid:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.blue {
+    background-color: #006699;
+}
+
+.pink {
+    background-color: #ffeeff;
+}
+
+.yellow {
+    background-color: #ffffcc;
+}
+
+.glay {
+    background-color: #eeeeee;
+}
+
+.orange {
+    background-color: #ffdbc9;
+}
+

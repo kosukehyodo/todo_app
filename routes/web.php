@@ -12,10 +12,9 @@
 */
 
     Auth::routes(); //パスワードリセット用
+    Route::resource('/', 'WelcomeController');
 
-    Route::resource('/', 'WelcomeController')->middleware('guest');
-
-    Route::resource('user', 'UserController')->only(['create', 'store']);
+    Route::resource('user', 'UserController')->only(['create', 'store', 'index']);
     Route::name('user.')->prefix('user')->group(function () {
         Route::post('/home', 'UserController@signup')->name('signup');
         Route::get('/login', 'UserController@login')->name('login');
@@ -23,5 +22,5 @@
     });
 
     Route::group(['middleware' => 'auth'], function () {
-        Route::resource('board', 'BoardController')->only(['index', 'store']);
+        Route::resource('board', 'BoardController')->only(['show', 'store', 'destroy']);
     });

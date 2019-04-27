@@ -13,6 +13,15 @@ class UserController extends Controller
     public function __construct(UserContract $userContract)
     {
         $this->user = $userContract;
+        //routingに描きたいがresourceでまとめているため、controllerで指定
+        $this->middleware('auth')->only(['index']);
+    }
+
+    public function index()
+    {
+        $users = Auth::user();
+
+        return view('user.index')->with('users', $users);
     }
 
     /**
@@ -45,9 +54,7 @@ class UserController extends Controller
             'password' => $request->password,
             ];
             if (Auth::attempt($authinfo)) {
-                $user = Auth::user();
-                //redirect()->route('user.signup')->with('user', $user)だとrouteで定義されていな為、エラー起こる。
-                return view('welcome')->with('user', $user);
+                return redirect()->route('user.index');
             } else {
                 return redirect()->back()->with('message', 'Failed to login!');
             }
