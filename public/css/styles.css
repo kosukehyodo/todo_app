@@ -37,3 +37,9 @@
     background-color: #ffdbc9;
 }
 
+.delete_card{
+    position: relative;
+    top: 50px;
+    left:5px;
+}
+
