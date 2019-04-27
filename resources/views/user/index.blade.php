@@ -24,11 +24,14 @@
     </div>
     @if (isset($users))
     @foreach($users->boards as $board)
-    <div class="card mt-4 mr-5" style="width:20rem;">
+    <div class="card mt-4 mr-5" style="width:20rem; height:150px;">
         <div class="card-body {{ $board->color }} mycard" data-id="{{ $board->id }}">
             <h3>{{$board->title}}</h3>
-            <div data-id="{{ $board->id }}" id="relative" class="btn btn-danger float-right btn-sm delete_card">Delete
-            </div>
+            <a href="#" class="delete_card btn-link float-right btn-sm　mt-4" data-id="{{ $board->id }}">Delete</a>
+            <form method="post" action="{{ url('/board', $board->id) }}" id="form_{{ $board->id }}">
+                {{ csrf_field() }}
+                {{ method_field('delete') }}
+            </form>
         </div>
     </div>
     @endforeach
@@ -83,48 +86,4 @@
     </div><!-- /.modal -->
     {{ csrf_field() }}
 </form>
-<script>
-    var card = document.getElementsByClassName('mycard');
-
-    for (var i = 0; i < card.length; i++) {
-
-        card[i].addEventListener("click", function() {
-            alert("go to detail");
-            document.location.href = '/board/' + this.dataset.id;
-        }, false);
-    }
-
-    $('.delete_card').on('click', function(e) {
-        'use strict';
-        if (confirm('What really sure you want to delete?')) {
-            var board_id = $(this).attr('data-id');
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
-                }
-            });
-            $.ajax({
-                    url: '/board/' + board_id,
-                    type: 'DELETE',
-                    data: {
-                        'id': board_id,
-                        _token: '{{ csrf_token() }}'
-                    }
-                })
-
-                .done(function(e) {
-                    alert("stop");
-                    e.stopPropagation();
-                })
-                .fail(function() {
-                    alert('削除に失敗しました。');
-                });
-        } else {
-            (function(e) {
-                e.stopPropagation();
-            });
-        };
-    });
-</script>
 @endsection
