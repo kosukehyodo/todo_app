@@ -11,6 +11,8 @@
 |
 */
 
+    Auth::routes(); //パスワードリセット用
+
     Route::resource('/', 'WelcomeController')->middleware('guest');
 
     Route::resource('user', 'UserController')->only(['create', 'store']);

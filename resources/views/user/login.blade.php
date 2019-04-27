@@ -13,7 +13,7 @@
         @endif
         {{ session('message') }}
     </div>
-    <div class="jumbotron mt-5 mx-auto" style="width:700px;">
+    <div class="jumbotron mt-5 mx-auto" style="width:700px; height: 400px;">
         <div class="container">
             <h2>Sign In</h2>
             @if(count($errors) >0)
@@ -32,8 +32,13 @@
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" class="form-control" style="width:600px;">
                 </div>
+                <div class="text-center">
+                    @if (Route::has('password.request'))
+                    <a class="btn btn-link" href="{{ route('password.request') }}">Forgot Your Password?</a>
+                    @endif
+                </div>
                 <div class="text-right">
-                    <button type="submit" class="btn btn-primary mt-4">login</button>
+                    <button type="submit" class="btn btn-primary mt-3">login</button>
                 </div>
                 {{ csrf_field() }}
             </form>
