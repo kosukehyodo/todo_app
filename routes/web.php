@@ -11,6 +11,7 @@
 |
 */
 
+    Auth::routes(); //パスワードリセット用
     Route::resource('/', 'WelcomeController');
 
     Route::resource('user', 'UserController')->only(['create', 'store', 'index']);
