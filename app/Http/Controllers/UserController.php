@@ -19,9 +19,9 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = Auth::user();
+        $user = Auth::user();
 
-        return view('user.index')->with('users', $users);
+        return view('user.index')->with('user', $user);
     }
 
     /**
