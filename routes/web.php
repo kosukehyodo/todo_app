@@ -23,5 +23,4 @@
 
     Route::group(['middleware' => 'auth'], function () {
         Route::resource('board', 'BoardController')->only(['show', 'store', 'destroy']);
-        Route::resource('card_list', 'CardListController')->only(['store']);
     });

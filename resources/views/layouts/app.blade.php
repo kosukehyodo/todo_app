@@ -16,8 +16,7 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/board.js') }}"></script>
+    <!-- headタグ内にjQuery本体は読み込むらしい -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 
@@ -26,6 +25,10 @@
     <div class="container">
         @yield('content')
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/board.js') }}"></script>
 </body>
 
 </html>

@@ -34,6 +34,7 @@ class CardListController extends Controller
      */
     public function store(Request $request)
     {
+        dd("aaa");
     }
 
     /**
