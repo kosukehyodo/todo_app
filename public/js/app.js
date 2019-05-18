@@ -1778,9 +1778,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  props: ["boardId"],
+  data: function data() {
+    return {
+      title: ""
+    };
+  },
+  methods: {
+    submit: function submit() {
+      var url = "/api/card_list/store";
+      axios.post(url, {
+        board_id: this.boardId,
+        title: this.title
+      }).then(function (response) {
+        console.log("status:", response.status); // 200
+
+        console.log("body:", response.data); // response body.
+      })["catch"](function (error) {
+        alert(error);
+        console.log(error.response.data);
+        console.log(error.response.status); // 例：400
+
+        console.log(error.response.statusText); // Bad Request
+      });
+    }
   }
 });
 
@@ -36567,28 +36592,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card card-default" }, [
-            _c("div", { staticClass: "card-header" }, [_vm._v("Card-List")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v("\n                    Card-List\n                ")
-            ])
-          ])
-        ])
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-light text-secondary",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#demo"
+        }
+      },
+      [_vm._v("+リストを追加する")]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "collapse", attrs: { id: "demo" } }, [
+      _c("div", { staticClass: "col-xs-5" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.title,
+              expression: "title"
+            }
+          ],
+          staticClass: "form-control mt-2 col-sm-2",
+          attrs: { type: "text" },
+          domProps: { value: _vm.title },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.title = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "mt-2", staticStyle: { "margin-left": "68px" } },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-info",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.submit()
+                  }
+                }
+              },
+              [_vm._v("リストを追加")]
+            )
+          ]
+        )
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
