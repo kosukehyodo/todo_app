@@ -16,7 +16,7 @@
 <body class="{{$board->color}}">
     @section('content')
     <div id="app">
-        <card_list></card_list>
+        <card-list></card-list>
     </div>
     @endsection
 </body>
