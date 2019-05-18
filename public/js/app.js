@@ -1778,24 +1778,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log("Component mounted.");
+    console.log('Component mounted.');
   }
 });
 
@@ -36589,46 +36574,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-secondary btn-xs",
-          staticStyle: { width: "150px" },
-          attrs: {
-            type: "button",
-            "data-toggle": "collapse",
-            "data-target": "#Listcollapse"
-          }
-        },
-        [_vm._v("+リストを追加")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "collapse", attrs: { id: "Listcollapse" } }, [
-        _c(
-          "div",
-          {
-            staticClass: "card card-body",
-            staticStyle: { width: "18rem", height: "7rem" }
-          },
-          [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                id: "board_title",
-                name: "title",
-                placeholder: "List title"
-              }
-            }),
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "card card-default" }, [
+            _c("div", { staticClass: "card-header" }, [_vm._v("Card-List")]),
             _vm._v(" "),
-            _c("input", {
-              staticClass: "btn btn-primary btn-xs mt-1",
-              staticStyle: { "margin-left": "130px" },
-              attrs: { type: "submit", value: "リストに追加" }
-            })
-          ]
-        )
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v("\n                    Card-List\n                ")
+            ])
+          ])
+        ])
       ])
     ])
   }
@@ -48848,7 +48804,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
-Vue.component('card_list', __webpack_require__(/*! ./components/CardList.vue */ "./resources/js/components/CardList.vue")["default"]);
+Vue.component('card-list', __webpack_require__(/*! ./components/CardList.vue */ "./resources/js/components/CardList.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
