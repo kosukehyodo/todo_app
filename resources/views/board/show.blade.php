@@ -16,7 +16,9 @@
 <body class="{{$board->color}}">
     @section('content')
     <div id="app">
-        <card-list></card-list>
+        <card-list
+        :board-id="{{json_encode($board->id)}}">
+        </card-list>
     </div>
     @endsection
 </body>

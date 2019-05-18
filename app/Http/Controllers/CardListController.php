@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\Contract\CardListContract;
+use App\Models\CardList;
 
 class CardListController extends Controller
 {
+   
     /**
      * Display a listing of the resource.
      *
@@ -29,12 +32,16 @@ class CardListController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $request,Board $board
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        dd("aaa");
+        return
+            CardList::create([
+                'board_id' => $request->board_id,
+                'title'    => $request->title
+            ]);
     }
 
     /**
