@@ -50,8 +50,8 @@ class UserController extends Controller
     {
         if ($request->isMethod('post')) {
             $authinfo = [
-            'email' => $request->email,
-            'password' => $request->password,
+                'email' => $request->email,
+                'password' => $request->password,
             ];
             if (Auth::attempt($authinfo)) {
                 return redirect()->route('user.index');

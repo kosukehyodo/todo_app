@@ -6,14 +6,18 @@ use App\Models\Board;
 use Illuminate\Http\Request;
 use App\Http\Requests\Board\BoardRequest;
 use App\Repositories\Contract\BoardContract;
+use App\Repositories\Contract\CardListContract;
 use Illuminate\Support\Facades\Auth;
 
 
 class BoardController extends Controller
 {
-    public function __construct(BoardContract $boardContract)
-    {
+    public function __construct(
+        BoardContract $boardContract,
+        CardListContract $cardListContract
+    ){
         $this->board = $boardContract;
+        $this->card_list = $cardListContract;
     }
 
     /**
@@ -58,8 +62,11 @@ class BoardController extends Controller
     public function show(Board $board)
     {
         $board = $this->board->getBoard($board->id);
+        $card_lists = $this->card_list->getCardList($board);
+
         return view('board.show')
-                ->with('board',$board);
+                ->with('board',$board)
+                ->with('card_lists',$card_lists);
     }
 
     /**
@@ -92,10 +99,9 @@ class BoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Board $board)
+    public function destroy(Board $board, Request $request)
     {
-        $this->board->deleteBoard($board);
-
-        return redirect()->back();
+        $borad = Board::findOrFail($request->id);
+        $board->delete();
     }
 }

@@ -1781,16 +1781,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["boardId"],
+  props: ["boardId", "cardLists"],
   data: function data() {
     return {
       title: ""
     };
   },
   methods: {
-    submit: function submit() {
-      var url = "/api/card_list/store";
+    addCardList: function addCardList() {
+      var _this = this;
+
+      var url = "/api/card_list";
       axios.post(url, {
         board_id: this.boardId,
         title: this.title
@@ -1798,12 +1821,14 @@ __webpack_require__.r(__webpack_exports__);
         console.log("status:", response.status); // 200
 
         console.log("body:", response.data); // response body.
+
+        _this.cardLists.push(response.data[0].title);
       })["catch"](function (error) {
+        // todo::エラーハンドリング
         alert(error);
         console.log(error.response.data);
-        console.log(error.response.status); // 例：400
-
-        console.log(error.response.statusText); // Bad Request
+        console.log(error.response.status);
+        console.log(error.response.statusText);
       });
     }
   }
@@ -36592,66 +36617,152 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-light text-secondary",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#demo"
-        }
-      },
-      [_vm._v("+リストを追加する")]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "collapse", attrs: { id: "demo" } }, [
-      _c("div", { staticClass: "col-xs-5" }, [
-        _c("input", {
-          directives: [
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _vm._l(_vm.cardLists, function(cardList) {
+        return _c("div", { key: cardList.id }, [
+          _c(
+            "div",
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.title,
-              expression: "title"
-            }
-          ],
-          staticClass: "form-control mt-2 col-sm-2",
-          attrs: { type: "text" },
-          domProps: { value: _vm.title },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.title = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "mt-2", staticStyle: { "margin-left": "68px" } },
-          [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-info",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.submit()
+              staticClass: "card w-25 float-right",
+              staticStyle: { height: "86px" }
+            },
+            [
+              _c("h5", { staticClass: "card-header" }, [
+                _vm._v(_vm._s(cardList.title))
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-light text-secondary",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "collapse",
+                    "data-target": "#Card"
                   }
+                },
+                [_vm._v("+カードを追加")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "collapse", attrs: { id: "Card" } }, [
+                _c("div", { staticClass: "col-xs-5" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.title,
+                        expression: "title"
+                      }
+                    ],
+                    staticClass: "form-control mt-2 col-sm-2",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.title },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.title = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "mt-2",
+                      staticStyle: { "margin-left": "68px" }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-info",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.addCard()
+                            }
+                          }
+                        },
+                        [_vm._v("リストを追加")]
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ]
+          )
+        ])
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "card_list" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-light text-secondary",
+            attrs: {
+              type: "button",
+              "data-toggle": "collapse",
+              "data-target": "#CardList"
+            }
+          },
+          [_vm._v("+リストを追加する")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "collapse", attrs: { id: "CardList" } }, [
+          _c("div", { staticClass: "col-xs-5" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.title,
+                  expression: "title"
                 }
-              },
-              [_vm._v("リストを追加")]
+              ],
+              staticClass: "form-control mt-2 col-sm-2",
+              attrs: { type: "text" },
+              domProps: { value: _vm.title },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.title = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "mt-2", staticStyle: { "margin-left": "68px" } },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-info",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.addCardList()
+                      }
+                    }
+                  },
+                  [_vm._v("リストを追加")]
+                )
+              ]
             )
-          ]
-        )
+          ])
+        ])
       ])
-    ])
-  ])
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

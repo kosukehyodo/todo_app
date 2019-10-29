@@ -17,7 +17,8 @@
     @section('content')
     <div id="app">
         <card-list
-        :board-id="{{json_encode($board->id)}}">
+        :board-id="{{json_encode($board->id)}}"
+        :card-lists="{{json_encode($card_lists)}}">
         </card-list>
     </div>
     @endsection

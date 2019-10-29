@@ -8,6 +8,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/board.js') }}"></script>
 
     <title>@yield('title')</title>
 
@@ -25,10 +28,6 @@
     <div class="container">
         @yield('content')
     </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/board.js') }}"></script>
 </body>
 
 </html>

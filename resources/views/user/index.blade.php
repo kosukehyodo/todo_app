@@ -27,11 +27,12 @@
     <div class="card mt-4 mr-5" style="width:20rem;">
         <div class="card-body {{ $board->color }} mycard" data-id="{{ $board->id }}">
             <h3>{{$board->title}}</h3>
-            <a href="#" class="delete_card btn-link float-right btn-sm　mt-4" data-id="{{ $board->id }}">Delete</a>
-            <form method="post" action="{{ url('/board', $board->id) }}" id="form_{{ $board->id }}">
+            <span class="delete_card btn-link float-right btn-sm mt-4" data-id="{{ $board->id }}">Delete</span>
+            <!-- <form method="post" action="{{ url('/board', $board->id) }}" id="submit_delete"> -->
+                <!-- <input type="submit" value="Delete" class="delete_card btn-link float-right btn-sm mt-4" >
                 {{ csrf_field() }}
-                {{ method_field('delete') }}
-            </form>
+                {{ method_field('delete') }} -->
+            <!-- </form> -->
         </div>
     </div>
     @endforeach
