@@ -22,4 +22,10 @@ class BoardRepository implements BoardContract
         $board = Board::findOrFail($board)->first();
         $board->delete();
     }
+
+    public function getBoard($id)
+    {
+        return
+            Board::find($id);
+    }
 }

@@ -19,9 +19,9 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = Auth::user();
+        $user = Auth::user();
 
-        return view('user.index')->with('users', $users);
+        return view('user.index')->with('user', $user);
     }
 
     /**
@@ -50,8 +50,8 @@ class UserController extends Controller
     {
         if ($request->isMethod('post')) {
             $authinfo = [
-            'email' => $request->email,
-            'password' => $request->password,
+                'email' => $request->email,
+                'password' => $request->password,
             ];
             if (Auth::attempt($authinfo)) {
                 return redirect()->route('user.index');

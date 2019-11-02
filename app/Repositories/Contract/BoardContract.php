@@ -13,4 +13,10 @@ interface BoardContract
      * ボードの削除.
      */
     public function deleteBoard($board);
+
+    /**
+     * ログインユーザーのボード取得.
+     * @param $id
+     */
+    public function getBoard($id);
 }

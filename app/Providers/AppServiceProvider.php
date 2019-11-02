@@ -28,5 +28,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Contract\BoardContract::class,
             \App\Repositories\BoardRepository::class
         );
+        // CardList
+        $this->app->bind(
+            \App\Repositories\Contract\CardListContract::class,
+            \App\Repositories\CardListRepository::class
+        );
     }
 }

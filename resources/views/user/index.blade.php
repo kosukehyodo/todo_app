@@ -2,8 +2,8 @@
 
 @section('header_menu')
 @parent
-@if (isset($users))
-<a class="text-muted mr-5">Welcome to {{ $users->name }} !!</a>
+@if (isset($user))
+<a class="text-muted mr-5">Welcome to {{ $user->name }} !!</a>
 @endif
 
 @if (Auth::check())
@@ -22,16 +22,12 @@
             <h3 class="text-muted">New Board</h3>
         </div>
     </div>
-    @if (isset($users))
-    @foreach($users->boards as $board)
-    <div class="card mt-4 mr-5" style="width:20rem; height:150px;">
+    @if (isset($user))
+    @foreach($user->boards as $board)
+    <div class="card mt-4 mr-5" style="width:20rem;">
         <div class="card-body {{ $board->color }} mycard" data-id="{{ $board->id }}">
             <h3>{{$board->title}}</h3>
-            <a href="#" class="delete_card btn-link float-right btn-sm　mt-4" data-id="{{ $board->id }}">Delete</a>
-            <form method="post" action="{{ url('/board', $board->id) }}" id="form_{{ $board->id }}">
-                {{ csrf_field() }}
-                {{ method_field('delete') }}
-            </form>
+            <a href="#" class="delete_card btn-link float-right btn-sm mt-4" data-id="{{ $board->id }}">Delete</a>
         </div>
     </div>
     @endforeach

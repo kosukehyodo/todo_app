@@ -8,7 +8,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    
     <title>@yield('title')</title>
 
     <!-- Styles -->
@@ -16,8 +16,7 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/board.js') }}"></script>
+    <!-- headタグ内にjQuery本体は読み込むらしい -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 
@@ -27,5 +26,8 @@
         @yield('content')
     </div>
 </body>
+<!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/board.js') }}"></script>
 
 </html>
