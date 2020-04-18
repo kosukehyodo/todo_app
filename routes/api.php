@@ -15,6 +15,5 @@ use Illuminate\Http\Request;
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1',function($api){
-    $api->resource('card_list',     'App\Http\Controllers\Api\V1\CardListController');
+    $api->post('add_list',     'App\Http\Controllers\Api\V1\CardListController@addList');
 });
-

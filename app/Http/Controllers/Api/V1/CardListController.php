@@ -92,4 +92,11 @@ class CardListController extends Controller
     {
         //
     }
+
+    public function addList(Request $request, Board $board)
+    {
+        dd($board);
+        $data = $request->input('add_list');
+
+    }
 }
